@@ -1,0 +1,32 @@
+#logo {
+    margin: 2% 30% -15% 34%;
+}
+.login {
+    margin: 25% 17%;
+    width: 67%;
+    height: 900px;
+    box-shadow: 0.8px 0.8px 20px;
+    border: 1px solid black;
+    border-radius: 0.7%;
+}
+.title {
+    text-align: center;
+    font-family: cursive;
+    font-size: 100px;
+}
+.input {
+    width: 55vw;
+    height: 2.5vh;
+    margin: 0px 0px 3% 7.6%;
+    box-shadow: inset 0.01px 0.01px 6px #7c35f3;
+}
+.submit {
+    color: whitesmoke;
+    width: 55.6vw;
+    height: 2.5vh;
+    margin: 0px 0px 3% 7.6%;
+    background-color: blue
+}
+h4 {
+    text-align: center;
+}
