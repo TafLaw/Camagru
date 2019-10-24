@@ -1,8 +1,20 @@
-<?php 
-    session_start();
+<?php
     $username = $_POST["username"];
     $password = $_POST["password"];
+    $servername = "localhost";
+    $nme = "root";
+    $pass = "81483465law";
+    $dbName = "Camagru";
 
+    /* try { */
+        include("install.php");
+        $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password);
+    /* }
+    catch (PDOException $e) {
+        echo "connection failed\n";
+        exit();
+    } */
+    /* var_dump($conn); */
     if ($_POST["submit"] == "SignUp")
         echo '<script>window.location="signup.php"</script>';
     
