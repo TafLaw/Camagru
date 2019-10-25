@@ -1,35 +1,44 @@
 <?php
     $username = $_POST["username"];
-    $password = $_POST["password"];
+    $password = hash('whirlpool', $_POST["password"]);
     $servername = "localhost";
     $nme = "root";
-    $pass = "81483465law";
+    $pass = "12345";
     $dbName = "Camagru";
 
-    /* try { */
-        include("install.php");
-        $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password);
-    /* }
-    catch (PDOException $e) {
-        echo "connection failed\n";
-        exit();
-    } */
-    /* var_dump($conn); */
-    if ($_POST["submit"] == "SignUp")
-        echo '<script>window.location="signup.php"</script>';
+
+    include("install.php");
     
-    else if (isset($username) && isset($password) && $_POST["submit"] == "Login")
+    if (isset($_POST['submit']))
     {
-        if (!empty($username) && strlen($username) >= 4 && strlen($password) <= 8){
-            if (empty($password) or strlen($password) < 5){
-                echo "Password must contain 5 or more characters";
+        if ($_POST['submit'] == "Login")
+        {
+            try {
+                $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password);
             }
-            else{
-                echo 'SUCCESSFUL!';
+            catch (PDOException $e) {
+                echo "connection failed\n".$e->getMessage();
+                exit();
             }
         }
-        else
-            echo "Username must contain 4 to 12 characters";
+    }
+
+    if ($_POST["submit"] == "SignUp"){
+        echo 'here';
+        echo '<script>window.location="signup.php"</script>';
+    }
+    $row = $conn->exec("SELECT FROM profiles WHERE name = '$username'");
+    if ($row)
+    {
+        if ($row['password'] == $password)
+        {
+            $_SESSION["loggedIn"] = $username;
+            header("location: home.php");
+        }
+        else{
+           echo "incorrect password";
+        }
+
     }
 ?>
 <!DOCTYPE html>
@@ -42,9 +51,9 @@
         <div class="login">
             <img id="logo" src="icons/logo.png" alt="logo">
             <h1 class="title">Camagru</h1>
-            <form action="index.php" method="post">
-                <input class="input" type="text" placeholder="Username" name="username" required><br/>
-                <input class="input" type="password" placeholder="Password" name="password" required><br/>
+            <form action="home.php" method="post">
+                <input class="input" type="text" placeholder="Username" name="username"><br/>
+                <input class="input" type="password" placeholder="Password" name="password"><br/>
                 <input class="submit" type="submit" name="submit" value="Login">
                 <h4>Or</h4><br/>
                 <input class="submit" type="submit" name="submit" value="SignUp">
