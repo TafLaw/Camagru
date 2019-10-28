@@ -1,5 +1,5 @@
 <?php
-    $username = $_POST["name"];
+    /* $username = $_POST["name"];
     $password = hash('whirlpool', $_POST["password"]);
     $email = $_POST["email"];
     $nme = "root";
@@ -30,7 +30,7 @@
                 if ($ind === 0)
                 {
                     /* $sql = "INSERT INTO 'profiles' (name, email, image, password)
-                    VALUES ('$username', '$email', '', '$password');"; */
+                    VALUES ('$username', '$email', '', '$password');"; /
                     
                     $conn->exec("INSERT INTO `profiles` (`name`, `email`, `image`, `password`) VALUES ('$username', '$email', '', '$password');");
                 } 
@@ -40,7 +40,7 @@
                 die();
             }    
         }
-    }
+    } */
     /* foreach($conn->query($sql) as $row)
     {
         if ($row['name'] == $username)
@@ -87,13 +87,13 @@
         <div class="login">
             <img id="logo" src="icons/logo.png" alt="logo">
             <h1 class="title">Camagru</h1>
-            <form action="signup.php" method="post">
+            <form action="verification.php" method="post">
                 <input class="input" type="text" placeholder="Name" name="name" required><br/>
                 <!-- <input class="input" type="text" placeholder="Surname" name="surname" required><br/> -->
                 <input class="input" type="text" placeholder="E-mail" name="email" required><br/>
                 <input class="input" type="password" placeholder="Password" name="password" required><br/>
-                <!-- <input class="input" type="password" placeholder="Confirm Password" name="conf_pass" required><br/> -->
-                <input class="submit" type="submit" name="submit" value="SignUp">
+                <input class="input" type="password" placeholder="Confirm Password" name="conf_pass" required><br/>
+                <input class="submit" type="submit" name="register" value="SignUp">
             </form>
         </div>
     </body>

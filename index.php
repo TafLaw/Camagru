@@ -9,9 +9,9 @@
 
     include("install.php");
     
-    if (isset($_POST['submit']))
+    if (isset($_POST['login']))
     {
-        if ($_POST['submit'] == "Login")
+        if ($_POST['login'] == "Login")
         {
             try {
                 $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password);
@@ -24,7 +24,6 @@
     }
 
     if ($_POST["submit"] == "SignUp"){
-        echo 'here';
         echo '<script>window.location="signup.php"</script>';
     }
     $row = $conn->exec("SELECT FROM profiles WHERE name = '$username'");
@@ -54,9 +53,9 @@
             <form action="home.php" method="post">
                 <input class="input" type="text" placeholder="Username" name="username"><br/>
                 <input class="input" type="password" placeholder="Password" name="password"><br/>
-                <input class="submit" type="submit" name="submit" value="Login">
+                <input class="submit" type="submit" name="login" value="Login">
                 <h4>Or</h4><br/>
-                <input class="submit" type="submit" name="submit" value="SignUp">
+                <input class="submit" type="submit" formaction="signup.php" value="SignUp">
             </form>
         </div>
     </body>
