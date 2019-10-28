@@ -37,19 +37,20 @@
                 $conn->exec("INSERT INTO `profiles` (`id`, `name`, `email`, `image`, `password`, `code`, `varified`, `date`) VALUES ('0', '$username', '$email', '', '$password', '$code', '0', '$dat');");
             }
 
-            $uid = $conn->lastInsertId() + 1;
+            $uid = $conn->lastInsertId();
             $message = "Your varification code is $code\n";
             $to = $email;
             $subject = "This is your verification code for Camagru\n";
             $from = 'muzerenganit@gmail.com';
-            $body='Your verification Code is '.$code.' Please Click On This link <a href="verification.php">verify.php?id='.$uid.'&code='.$code.'</a>to activate your account.';
-            $header = "From:".$from;
-            echo var_dump(mail($to,$subject,$body,$header));
-            echo "$to";
-            if(mail($to,$subject,$body,$header))
+            $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'">http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
+            /* $body = "<a href='google.com'>register</a>"; */
+            $headers = "From:".$from."\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+            if(mail($to,$subject,$body,$headers))
                 include("thankYou.html");
             else
-                echo '<h3 style="color:red;">failed to sent an email</h3>';
+                echo '<h3 style="color:red;">failed to sent email</h3>';
         }
         catch (PDOException $e) {
             echo "Connection Failed".$e->getMessage();
