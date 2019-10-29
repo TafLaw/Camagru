@@ -1,8 +1,8 @@
 <?php 
     define('SERVERNAME', 'localhost');
-    define('USERNAME', 'username');
-    define('PASSWORD', 'password');
-    define('DBNAME', 'databasename');
+    define('USERNAME', 'root');
+    define('PASSWORD', '12345');
+    define('DBNAME', 'Camagru');
 
     function connDB()
     {

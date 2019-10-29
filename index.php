@@ -1,11 +1,12 @@
 <?php
+    include 'ConnDB.php';
+    
     $username = $_POST["username"];
-    $password = hash('whirlpool', $_POST["password"]);
-    $servername = "localhost";
-    $nme = "root";
-    $pass = "12345";
-    $dbName = "Camagru";
-
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $servername = SERVERNAME;
+    $nme = USERNAME;
+    $pass = PASSWORD;
+    $dbName = DBNAME;
 
     include("install.php");
     
@@ -23,9 +24,6 @@
         }
     }
 
-    if ($_POST["submit"] == "SignUp"){
-        echo '<script>window.location="signup.php"</script>';
-    }
     $row = $conn->exec("SELECT FROM profiles WHERE name = '$username'");
     if ($row)
     {
