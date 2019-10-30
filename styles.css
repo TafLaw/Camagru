@@ -32,6 +32,10 @@
     margin: 0px 0px 3% 7.6%;
     box-shadow: inset 0.01px 0.01px 6px #7c35f3;
 }
+#forgotPW {
+    text-align: center;
+    margin-top: -10px;
+}
 .submit {
     color: whitesmoke;
     width: 87%;

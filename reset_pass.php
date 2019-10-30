@@ -12,7 +12,7 @@
 
         if ($res)
         {
-            $update = $conn->prepare("UPDATE profiles SET password ")
+            $update = $conn->prepare("UPDATE profiles SET password ");
         }
     }
 

@@ -6,36 +6,7 @@
     $pass = PASSWORD;
     $dbName = DBNAME;
 
-
     include("install.php");
-    
-    /* if (isset($_POST['login']))
-    {
-        if ($_POST['login'] == "Login")
-        {
-            try {
-                $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password);
-            }
-            catch (PDOException $e) {
-                echo "connection failed\n".$e->getMessage();
-                exit();
-            }
-        }
-    }
-
-    $row = $conn->exec("SELECT FROM profiles WHERE name = '$username'");
-    if ($row)
-    {
-        if ($row['password'] == $password)
-        {
-            $_SESSION["loggedIn"] = $username;
-            header("location: home.php");
-        }
-        else{
-           echo "incorrect password";
-        }
-
-    } */
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,6 +22,7 @@
                 <input class="input" type="text" placeholder="Username" name="username"><br/>
                 <input class="input" type="password" placeholder="Password" name="password"><br/>
                 <input class="submit" type="submit" name="login" value="Login">
+                <p id="forgotPW"><a href="forgot_pass.php">forgot password?</a></p>
                 <h4>Or</h4><br/>
                 <input class="submit" type="submit" formaction="signup.php" value="SignUp">
             </form>
