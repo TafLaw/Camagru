@@ -1,4 +1,5 @@
 <?php 
+    include 'ConnDB.php';
     class userClass{
         //login
         public function login($usernameEmail, $password)
@@ -47,13 +48,24 @@
                 $dat = date("d F Y");
                 $conn = connDB();
                 $stmt = $conn->prepare("SELECT id FROM profiles WHERE username=:username OR email=:email");
-                $stmt = bindParam("ss", $username, $email);
-                $stmt->execute();
+                $stmt->bindParam("email", $email,PDO::PARAM_STR);
+                $stmt->bindParam("username", $username,PDO::PARAM_STR);
                 $rows = $stmt->rowCount();
-                if ($rows < 1)
+                $sqlcol = "SELECT * FROM `profiles`";
+                $ind = 0;
+                foreach($conn->query($sqlcol) as $row)
                 {
-                    $stmt = $conn->prepare("INSERT INTO `profiles` (`id`, `name`, `email`, `image`, `password`, `code`, `varified`, `date`) VALUES ('0', '$username', '$email', '', '$password', '$code', '0', '$dat');");
-                    $stmt = bindParam("sss", $username, $email, $password);
+                    if ($row['name'] == $username or $row['email'] == $email)
+                    {
+                        echo '<script>alert("username/Email already in use")</script>';
+                        echo '<script>window.location="signup.php"</script>';
+                        $ind++;
+                    }
+                }
+                if ($rows < 1 && $ind == 0)
+                {
+                    $stmt = $conn->prepare("INSERT INTO `profiles` (`name`, `email`, `image`, `password`, `code`, `varified`, `date`) VALUES ('$username', '$email', '', '$password', '$code', '0', '$dat');");
+                    $stmt->bindParam("sss", $username, $email, $password);
                     $stmt->execute();
 
                     //email and verification
@@ -70,7 +82,7 @@
                     if(mail($to,$subject,$body,$headers))
                         include("thankYou.html");
                     else
-                        echo '<h3 style="color:red;">failed to sent email</h3>';
+                        echo '<h3 style="color:red;">failed to send email</h3>';
                     //conn to null
                     $_SESSION['id'] = $id;
                     return true;

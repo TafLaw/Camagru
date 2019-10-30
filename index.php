@@ -1,16 +1,15 @@
 <?php
     include 'ConnDB.php';
-    
-    $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
     $servername = SERVERNAME;
     $nme = USERNAME;
     $pass = PASSWORD;
     $dbName = DBNAME;
 
+
     include("install.php");
     
-    if (isset($_POST['login']))
+    /* if (isset($_POST['login']))
     {
         if ($_POST['login'] == "Login")
         {
@@ -36,7 +35,7 @@
            echo "incorrect password";
         }
 
-    }
+    } */
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +47,7 @@
         <div class="login">
             <img id="logo" src="icons/logo.png" alt="logo">
             <h1 class="title">Camagru</h1>
-            <form action="home.php" method="post">
+            <form action="loginVer.php" method="post">
                 <input class="input" type="text" placeholder="Username" name="username"><br/>
                 <input class="input" type="password" placeholder="Password" name="password"><br/>
                 <input class="submit" type="submit" name="login" value="Login">
