@@ -30,7 +30,8 @@
                 if ($update)
                 {
                     echo '<body style=" padding: 50px; margin: 30%;"><h3 style="color: #90EE90; text-align: center;">e-mail verified successfully</h3>';
-                    echo '<img src="icons/shield.png" style="width: 150px; height: 150px; margin-left: 35%;" alt="verified"></body>'; 
+                    echo '<img src="icons/shield.png" style="width: 150px; height: 150px; margin-left: 35%;" alt="verified">';
+                    echo '<button style="background-color: #7750bb; color:white;" onclick="window.location.href = "index.php";">Click Here</button></body>';
                 }
                 else
                 echo "<h3 style='color: red';>Could not varify email\n</h3>";
@@ -39,7 +40,8 @@
             
             {
                 echo '<body style=" padding: 50px; margin: 30%;"><h3 style="color: #90EE90; text-align: center;">account already varified</h3>';
-                echo '<img src="icons/shield.png" style="width: 150px; height: 150px; margin-left: 35%;" alt="verified"></body>'; 
+                echo '<img src="icons/shield.png" style="width: 150px; height: 150px; margin-left: 35%;" alt="verified">'; 
+                echo '<button style="background-color: #7750bb; color:white; margin: 60px 0px 0px 45%;" onclick="window.location.href=\'index.php\';">Back to Login</button></body>';
             }
         } catch (PDOException $e) {
             echo "Connection failed".$e->setMessage();

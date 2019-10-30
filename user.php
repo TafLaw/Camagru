@@ -13,12 +13,22 @@
                 $stmt->bindParam("passwd", $passwd,PDO::PARAM_STR);
                 $stmt->execute();
                 //count rows in stmt
-                $rows = $stmt->rowCount();
-                //fetch next row and return it as an object
-                $data = $stmt->fetch(PDO::FETCH_OBJ);
-                if ($rows)
+                $data = "SELECT * FROM profiles WHERE (name = '$usernameEmail' or email = '$usernameEmail')"; /* AND password = '$passwd'"; */
+                $ind = 0;
+                foreach($conn->query($data) as $row)
                 {
-                    $_SESSION['id'] = $data->id;
+                    echo $row['password'];
+                    echo '\n';
+                    echo $passwd;
+                    if (($row['name'] == $usernameEmail or $row['email'] == $usernameEmail) && $row['password'] == $passwd)
+                    {
+                        $ind++;
+                        $uid = row['id'];
+                    }
+                }
+                if ($ind)
+                {
+                    $_SESSION['id'] = $uid;
                     return true;
                 }
                 else
@@ -27,7 +37,14 @@
                 echo "connection failed".$e->getMessage();
             }
         }
-
+        //check if password matches
+        public function match($password, $confirm)
+        {
+            if ($confirm == $password)
+            return true;
+            return false;
+        }
+        
         //validate user info
         public function valid($password)
         {
@@ -74,7 +91,7 @@
                     $to = $email;
                     $subject = "This is your verification code for Camagru\n";
                     $from = 'muzerenganit@gmail.com';
-                    $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/verify.php?id='.$id.'&code='.$code.'">http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
+                    $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/verify.php?id='.$id.'&code='.$code.'" target="_blank">http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
                     /* $body = "<a href='google.com'>register</a>"; */
                     $headers = "From:".$from."\r\n";
                     $headers .= "MIME-Version: 1.0\r\n";

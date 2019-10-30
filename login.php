@@ -15,6 +15,7 @@
                 <input class="input" type="text" placeholder="Username" name="username"><br/>
                 <input class="input" type="password" placeholder="Password" name="password"><br/>
                 <input class="submit" type="submit" name="login" value="Login">
+                <p id="forgotPW"><a href="forgot_pass.php">forgot password?</a></p>
                 <h4>Or</h4><br/>
                 <input class="submit" type="submit" formaction="signup.php" value="SignUp">
             </form>
