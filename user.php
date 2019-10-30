@@ -6,29 +6,26 @@
         {
             try {
                 $conn = connDB();
-                $passwd = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                $stmt = $conn->prepare("SELECT id FROM profiles WHERE (name=:usernameEmail or email=:usernameEmail) AND password=:passwd");
+                $deta = "SELECT * FROM profiles WHERE (name = '$usernameEmail' or email = '$usernameEmail')";
+                $ind = 0;
+                //verify password
+                foreach($conn->query($deta) as $row)
+                {
+                    if (password_verify($password, $row['password']))
+                        $passwd = $row['password'];
+                }
+                $stmt = $conn->prepare("SELECT id FROM profiles WHERE (name=:usernameEmail or email=:usernameEmail) AND password = '$passwd'");
                 //protect against sql injection (stored as type char / varchar)
                 $stmt->bindParam("usernameEmail", $usernameEmail,PDO::PARAM_STR);
                 $stmt->bindParam("passwd", $passwd,PDO::PARAM_STR);
                 $stmt->execute();
                 //count rows in stmt
-                $data = "SELECT * FROM profiles WHERE (name = '$usernameEmail' or email = '$usernameEmail')"; /* AND password = '$passwd'"; */
-                $ind = 0;
-                foreach($conn->query($data) as $row)
+                $rows = $stmt->rowCount();
+                //fetch next row and return it as an object
+                $data = $stmt->fetch(PDO::FETCH_OBJ);
+                if ($rows)
                 {
-                    echo $row['password'];
-                    echo '\n';
-                    echo $passwd;
-                    if (($row['name'] == $usernameEmail or $row['email'] == $usernameEmail) && $row['password'] == $passwd)
-                    {
-                        $ind++;
-                        $uid = row['id'];
-                    }
-                }
-                if ($ind)
-                {
-                    $_SESSION['id'] = $uid;
+                    $_SESSION['id'] = $data->id;
                     return true;
                 }
                 else
@@ -91,7 +88,7 @@
                     $to = $email;
                     $subject = "This is your verification code for Camagru\n";
                     $from = 'muzerenganit@gmail.com';
-                    $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/verify.php?id='.$id.'&code='.$code.'" target="_blank">http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
+                    $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/verify.php?id='.$id.'&code='.$code.'">http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
                     /* $body = "<a href='google.com'>register</a>"; */
                     $headers = "From:".$from."\r\n";
                     $headers .= "MIME-Version: 1.0\r\n";
