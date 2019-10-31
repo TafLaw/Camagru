@@ -1,4 +1,4 @@
-<?php include 'reset_getMail';?>
+<?php/*  include 'reset_getMail.php'; */?>
 <!DOCTYPE html>
 <html>
     <head>

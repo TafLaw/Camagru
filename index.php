@@ -1,31 +1,12 @@
 <?php
-    include 'ConnDB.php';
-
+    include 'connect/ConnDB.php';
     $servername = SERVERNAME;
     $nme = USERNAME;
     $pass = PASSWORD;
     $dbName = DBNAME;
-
-    include("install.php");
+    include("connect/config.php");
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Camagru Login/SignUp</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="login">
-            <img id="logo" src="icons/logo.png" alt="logo">
-            <h1 class="title">Camagru</h1>
-            <form action="loginVer.php" method="post">
-                <input class="input" type="text" placeholder="Username" name="username"><br/>
-                <input class="input" type="password" placeholder="Password" name="password"><br/>
-                <input class="submit" type="submit" name="login" value="Login">
-                <p id="forgotPW"><a href="forgot_pass.php">forgot password?</a></p>
-                <h4>Or</h4><br/>
-                <input class="submit" type="submit" formaction="signup.php" value="SignUp">
-            </form>
-        </div>
-    </body>
-</html>
+<?php 
+    echo '<h1 style="color: skyblue">This is the home page\n</h1>';
+    echo '<button style="background-color: #7750bb; color:white; margin: 60px 0px 0px 45%;" onclick="window.location.href=\'authenticate/login_signup/signin_up.php\';">Back to Login</button></body>'
+?>

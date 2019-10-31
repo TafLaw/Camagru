@@ -11,7 +11,7 @@
     {
         if($obj->login($username, $password))
         {
-            header("location: home.php");
+            header("location: ../../index.php");
         }
         else
         {

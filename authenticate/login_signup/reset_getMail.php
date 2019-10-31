@@ -1,5 +1,5 @@
 <?php 
-    include 'ConnDB.php';
+    include '../../connect/ConnDB.php';
 
     $email = $_GET['email'];
     $conn = connDB();
@@ -22,12 +22,12 @@
             $to = $email;
             $subject = "Password Reset\n";
             $from = 'muzerenganit@gmail.com';
-            $body='Please Click On This link <a href="http://localhost:8080/Camagru/newpass.php?id='.$uid.'&email='.$email.'" target="_blank">http://localhost:8080/Camagru/newpass.php?id='.$uid.'&email='.$email.'</a> to reset your password.';
+            $body='Please Click On This link <a href="http://localhost:8080/Camagru/authenticate/login_signup/newpass.php?id='.$uid.'&email='.$email.'" target="_blank">http://localhost:8080/Camagru/authenticate/login_signup/newpass.php?id='.$uid.'&email='.$email.'</a> to reset your password.';
             $headers = "From:".$from."\r\n";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
             if(mail($to,$subject,$body,$headers))
-                include("thankYou.html");
+                include("../../resetmail.html");
             else
                 echo '<h3 style="color:red;">failed to send email</h3>';
         }
@@ -35,6 +35,6 @@
         {
             $error = "Email address not found";
             include("forgot_pass.php");
-        }
+        } 
     }
 ?>

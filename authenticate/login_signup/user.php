@@ -1,5 +1,5 @@
 <?php 
-    include 'ConnDB.php';
+    include '../../connect/ConnDB.php';
     class userClass{
         //login
         public function login($usernameEmail, $password)
@@ -88,13 +88,13 @@
                     $to = $email;
                     $subject = "This is your verification code for Camagru\n";
                     $from = 'muzerenganit@gmail.com';
-                    $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/verify.php?id='.$id.'&code='.$code.'">http://localhost:8080/Camagru/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
+                    $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/authenticate/login_signup/verify.php?id='.$id.'&code='.$code.'">http://localhost:8080/Camagru/authenticate/login_signup/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
                     /* $body = "<a href='google.com'>register</a>"; */
                     $headers = "From:".$from."\r\n";
                     $headers .= "MIME-Version: 1.0\r\n";
                     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
                     if(mail($to,$subject,$body,$headers))
-                        include("thankYou.html");
+                        include("../../thankYou.html");
                     else
                         echo '<h3 style="color:red;">failed to send email</h3>';
                     //conn to null

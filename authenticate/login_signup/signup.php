@@ -3,11 +3,11 @@
 <html>
     <head>
         <title>Camagru Login/SignUp</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
         <div class="login">
-            <img id="logo" src="icons/logo.png" alt="logo">
+            <img id="logo" src="../../icons/logo.png" alt="logo">
             <h1 class="title">Camagru</h1>
             <form action="verification.php" method="post">
                 <input class="input" type="text" minlength="5" title="username must contain at least 5 characters" placeholder="Name" name="name" required><br/>

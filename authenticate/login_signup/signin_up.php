@@ -2,14 +2,11 @@
 <html>
     <head>
         <title>Camagru Login/SignUp</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
-        <div id="error">
-            <?php echo '<p class="error">'.$error.'</p>'; ?>
-        </div>
         <div class="login">
-            <img id="logo" src="icons/logo.png" alt="logo">
+            <img id="logo" src="../../icons/logo.png" alt="logo">
             <h1 class="title">Camagru</h1>
             <form action="loginVer.php" method="post">
                 <input class="input" type="text" placeholder="Username" name="username"><br/>

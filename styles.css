@@ -46,3 +46,12 @@
 h4 {
     text-align: center;
 }
+.profilepic {
+    background-color: #7a63a2;
+    background-image: URL('icons/user-silhouette.png');
+    background-size: contain;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+}
