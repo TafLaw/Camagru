@@ -37,7 +37,7 @@
     margin-top: -10px;
 }
 .submit {
-    color: whitesmoke;
+    color: white;
     width: 87%;
     height: 2.5vh;
     margin: 0px 0px 3% 7.6%;
@@ -46,12 +46,85 @@
 h4 {
     text-align: center;
 }
-.profilepic {
+.navBar {
+    background-color: #ab98ce;
+    width: 100%;
+    height: 99px;
+}
+#profilepic {
     background-color: #7a63a2;
     background-image: URL('icons/user-silhouette.png');
     background-size: contain;
     background-size: cover;
     width: 100px;
     height: 100px;
-    padding: 20px;
+    padding: 30px;
+    margin: 10% auto;
+    border-radius: 50%;
+}
+#pubUsername {
+    text-align: center;
+}
+#pubAbout {
+    text-align: center;
+}
+#pubBar {
+    width: 100%;
+    background-color: #7750bb;
+    
+    margin-top: 45px;
+}
+#pubBar li {
+    display: inline;
+    margin: 0px 10%;
+    border: 2px solid #000;
+    padding: 6px;
+}
+#pubBar ul {
+    padding: 2% 2% 2% 14%;
+}
+#timeline {
+    background-color: #ab98ce;
+    height: 75vh;
+}
+#editTable {
+    border-collapse:collapse;
+    width: 100%;
+}
+td{
+    border: 1px solid #252323;
+    text-align: left;
+    padding: 8px;
+    height: 20px
+    
+}
+.edit {
+    float: right;
+}
+.button {
+    background-color: #7750bb;
+    color: white;
+}
+#btndd {
+    position: relative;
+    display: inline-block;
+}
+.dropdown {
+    margin-left: 47.6px;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+}
+.dropdown a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+#btndd:hover .dropdown{
+    display: block;
+}
+.dropdown a:hover {
+    background-color: #ab98ce;
+    color: white;
 }
