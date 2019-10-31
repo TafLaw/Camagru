@@ -5,6 +5,11 @@
         <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
+        <nav>
+            <div class="navBar">
+
+            </div>
+        </nav>
         <div class="login">
             <img id="logo" src="../../icons/logo.png" alt="logo">
             <h1 class="title">Camagru</h1>
