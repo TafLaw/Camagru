@@ -111,12 +111,13 @@ td{
     display: inline-block;
 }
 .dropdown {
-    margin-left: 47.6px;
+    margin-left: 47%;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px -8px black;
 }
-.dropdown a {
+.btn {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -125,7 +126,38 @@ td{
 #btndd:hover .dropdown{
     display: block;
 }
-.dropdown a:hover {
+.btn:hover {
     background-color: #ab98ce;
     color: white;
+}
+/* upload */
+.sideUpload {
+    position: relative;
+    display: inline;
+}
+.uploadbtn {
+    width: 100%;
+}
+.uploadpop-cont {
+    margin-left: 73px;
+    margin-top: -39px;
+    display: none;
+    position: absolute;
+    background-color: #ab98ce;
+    width: 350px;
+    height: 40px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.capturepop-cont {
+    margin-left: 74.9px;
+    margin-top: -200px;
+    display: none;
+    position: absolute;
+    background-color: #ab98ce;
+    width: 60vw;
+    height: 450px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.show {
+    display: inline-block  ;
 }
