@@ -3,6 +3,8 @@
     <head>
         <title>Edit Profile</title>
         <link rel="stylesheet" href="../../styles.css">
+        <script src="../../js/pop.js"></script>
+        <script src="../../js/camera.js"></script>
     </head>
     <body>
         <nav>
@@ -16,8 +18,20 @@
         <div id="btndd">
             <button class="button" href="#">change profile picture</button>
             <div class="dropdown">
-                <a href="#">upload</a>
-                <a href="#">Capture</a>
+                <div class="sideUpload">
+                    <button onclick="uploadBtn()" class="uploadbtn btn">upload</button>
+                    <div id="uploadpop" class="uploadpop-cont">
+                        <form action="../../thankYou.html" method="POST" enctype="multipart/form-data">
+                            <input type="file" name="file">
+                            <button type="submit" name="submit">upload</button>
+                        </form>
+                    </div>
+                    <button onclick="captureBtn()" class="capturebtn btn">capture</button>
+                    <div id="capturepop" class="capturepop-cont">
+                        <video autoplay="true" id="video"></video>
+                        The capture will be here
+                    </div>
+                </div>
             </div>
         </div>
         <p>
