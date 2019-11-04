@@ -1,3 +1,6 @@
+<?php 
+    include 'imageUploads/upload.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,13 +24,13 @@
                 <div class="sideUpload">
                     <button onclick="uploadBtn()" class="uploadbtn btn">upload</button>
                     <div id="uploadpop" class="uploadpop-cont">
-                        <form action="../../thankYou.html" method="POST" enctype="multipart/form-data">
+                        <form action="imageUploads/upload.php" method="POST" enctype="multipart/form-data">
                             <input type="file" name="file">
                             <button type="submit" name="submit">upload</button>
                         </form>
                     </div>
                     <!-- <div id="capturepop" class="capturepop-cont">
-                        
+                    
                     </div> -->
                 </div>
                 <button onclick='window.location.href="capture.html";' class="capturebtn btn">capture</button>
@@ -37,7 +40,7 @@
             <table id="editTable">
                 <tr>
                     <td>USERNAME:
-                        <button class="edit button" href="#">edit</button>
+                        <button class="edit button" onclick="window.location.href='edit/editUsername.php'">edit</button>
                     </td>
                 </tr>
                 <tr>

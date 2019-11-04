@@ -1,32 +1,22 @@
-'use strict';
-
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const snap = document.getElementById("snap");
-const errorMsgElement = document.querySelector('span#errorMsg');
+var video = document.querySelector("#video");
 
 const constraints = {
   video: {
-    width: 500, height: 375
+    width: 450, height: 450
   }
 };
-
-// Access webcam
-async function init() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    handleSuccess(stream);
-  } catch (e) {
-    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
-  }
+//access the webcam
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
 }
-
-function handleSuccess(stream) {
-  window.stream = stream;
-  video.srcObject = stream;
-}
-init();
+//view image .. canvas tag
 var context = canvas.getContext('2d');
 snap.addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 640, 480);
+	context.drawImage(video, 0, 0, 200, 200);
 });
