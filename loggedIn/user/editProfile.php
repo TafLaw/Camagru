@@ -1,5 +1,18 @@
 <?php 
-    include 'imageUploads/upload.php';
+    session_start();
+    include '../../connect/ConnDB.php';
+    if (!isset($_SESSION['id']))
+        header("location: ../../authenticate/login_signup/signin_up.php");
+
+    $conn = connDB();
+    $id = $_SESSION['id'];
+    $select = "SELECT * FROM profiles WHERE id = '$id' LIMIT 1";
+    foreach($conn->query($select) as $rows)
+    {
+        $name = $rows['name'];
+        $email = $rows['email'];
+        $image = $rows['image'];
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,16 +20,18 @@
         <title>Edit Profile</title>
         <link rel="stylesheet" href="../../styles.css">
         <script src="../../js/pop.js"></script>
-       
+        
     </head>
     <body>
         <nav>
             <div class="navBar">
-
+                <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
             </div>
         </nav>
-        <div id="profilepic">
-    
+        <div class="profilepic" <?php 
+            if($image)
+                echo 'style="background-image: URL(\'imageUploads/'.$image."')".'"'; ?>
+        >
         </div>
         <div id="btndd">
             <button class="button" href="#">change profile picture</button>
@@ -29,9 +44,6 @@
                             <button type="submit" name="submit">upload</button>
                         </form>
                     </div>
-                    <!-- <div id="capturepop" class="capturepop-cont">
-                    
-                    </div> -->
                 </div>
                 <button onclick='window.location.href="capture.html";' class="capturebtn btn">capture</button>
             </div>
@@ -39,13 +51,13 @@
         <p>
             <table id="editTable">
                 <tr>
-                    <td>USERNAME:
+                    <td>USERNAME: <label style="margin-left: 30%"><?php echo $name; ?></label>
                         <button class="edit button" onclick="window.location.href='edit/editUsername.php'">edit</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>EMAIL:
-                        <button class="edit button" href="#">edit</button>
+                    <td>EMAIL: <label style="margin-left: 30%"><?php echo $email; ?></label>
+                        <button class="edit button" onclick="window.location.href='edit/editEmail.php'">edit</button>
                     </td>
                 </tr>
                 <tr>

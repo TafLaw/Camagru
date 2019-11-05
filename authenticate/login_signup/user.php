@@ -4,6 +4,7 @@
         //login
         public function login($usernameEmail, $password)
         {
+            session_start();
             try {
                 $conn = connDB();
                 $deta = "SELECT * FROM profiles WHERE (name = '$usernameEmail' or email = '$usernameEmail')";

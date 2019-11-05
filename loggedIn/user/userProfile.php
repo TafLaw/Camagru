@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    if (!isset($_SESSION['id']))
+        header("location: ../../authenticate/login_signup/signin_up.php");
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,13 +12,14 @@
     <body>
         <nav>
             <div class="navBar">
-    
+                <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>            
             </div>
         </nav>
         <div id="profilepic">
 
         </div>
         <p>
+            <button onclick="window.location.href='editProfile.php'">Edit profile</button>
             <h2 id="pubUsername">USERNAME</h2>
             <div id="pubAbout">
                 ABOUT 

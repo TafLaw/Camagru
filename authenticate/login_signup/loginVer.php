@@ -1,5 +1,6 @@
 <?php
    /*  include 'ConnDB.php'; --> */
+    session_start();
     include 'user.php';
     
     $username = $_POST["username"];
@@ -9,9 +10,9 @@
 
     if (isset($_POST['login']))
     {
-        if($obj->login($username, $password))
+        if($obj->login($username, $password) && isset($_SESSION['id']))
         {
-            header("location: ../../loggedIn/user/userProfile.html");
+            header("location: ../../loggedIn/user/userProfile.php");
         }
         else
         {

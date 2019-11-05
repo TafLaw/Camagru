@@ -32,6 +32,12 @@
     margin: 0px 0px 3% 7.6%;
     box-shadow: inset 0.01px 0.01px 6px #7c35f3;
 }
+#newUn {
+    width: 50%;
+    height: 2.5vh;
+    margin-top: 50px;
+    box-shadow: inset 0.01px 0.01px 6px #7c35f3;
+}
 #forgotPW {
     text-align: center;
     margin-top: -10px;
@@ -51,7 +57,7 @@ h4 {
     width: 100%;
     height: 99px;
 }
-#profilepic {
+.profilepic {
     background-color: #7a63a2;
     background-image: URL('icons/user-silhouette.png');
     background-size: contain;
@@ -62,6 +68,7 @@ h4 {
     margin: 10% auto;
     border-radius: 50%;
 }
+
 #pubUsername {
     text-align: center;
 }

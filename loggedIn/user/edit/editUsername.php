@@ -1,30 +1,36 @@
 <?php 
-   include_once '../../../connect/ConnDB.php';
-session_start();
+    include_once '../../../connect/ConnDB.php';
+    session_start();
     $conn = connDB();
-    $error = NULL;
-echo var_dump($_SESSION['id']);
-   /* if (isset($_POST['submit']))
+
+   if (isset($_POST['submit']))
     {
-        $sqlcol = "SELECT * FROM `profiles`";
-        $ind = 0;
-        $newUsername = $_POST['name'];
-        foreach($conn->query($sqlcol) as $row)
+        if (isset($_SESSION['id']))
         {
-            if ($row['name'] == $username or $row['email'] == $email)
+            $sqlcol = "SELECT * FROM `profiles`";
+            $ind = 0;
+            $newUsername = $_POST['name'];
+            $id = $_SESSION['id'];
+            
+            foreach($conn->query($sqlcol) as $row)
             {
-                echo '<script>alert("username)</script>';
-                echo '<script>window.location="signup.php"</script>';
-                $ind++;
+                if ($row['name'] == $newUsername)
+                {
+                    echo '<script>alert("username already in use")</script>';
+                    echo '<script>window.location="editUsername.php"</script>';
+                    $ind++;
+                }
+            }
+            if ($ind == 0)
+            {
+                $stmt = $conn->prepare("UPDATE profiles SET name = '$newUsername' WHERE id = '$id' LIMIT 1");
+                $stmt->bindParam('newUsername', $newUsername,PDO::PARAM_STR);
+                $stmt->execute();
             }
         }
-        if ($ind == 0)
-        {
-            $id = $_SESSION['id'];
-            $stmt = $conn->prepare("UPDATE profiles SET name = '$username' WHERE id = '$id' LIMIT 1");
-            $stmt->bindParam('newUsername', $newUsername,PDO::PARAM_STR);
-        }
-    } */
+        else
+            echo "session not set";
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,11 +42,11 @@ echo var_dump($_SESSION['id']);
     <body>
         <nav>
             <div class="navBar">
-    
+                <button onclick="window.location.href='../../../authenticate/login_signup/logout.php'">log out</button>            
             </div>
         </nav>
         <form action="" method="post">
-            <input class="input" type="text" minlength="5" title="username must contain at least 5 characters" placeholder="Enter new username" name="name" required>
+            <input id = "newUn" type="text" minlength="5" title="username must contain at least 5 characters" placeholder="Enter new username" name="name" required>
             <input type="submit" name="submit" value="proceed">
         </form>
     </body>
