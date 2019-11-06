@@ -23,11 +23,11 @@
             }
             if ($ind == 0)
             {
-                $stmt = $conn->prepare("UPDATE profiles SET email = '$newEmail', varified = 0 WHERE id = '$id' LIMIT 1");
+                $code = substr(password_hash($newEmail, PASSWORD_DEFAULT), 0, 8);
+                $stmt = $conn->prepare("UPDATE profiles SET email = '$newEmail', varified = 0, code = '$code' WHERE id = '$id' LIMIT 1");
                 $stmt->bindParam('newEmail', $newEmail,PDO::PARAM_STR);
                 $stmt->execute();
 
-                $code = substr(password_hash('$email', PASSWORD_DEFAULT), 0, 8);
                 $uid = $_SESSION['id'];
                 $message = "Your varification code is $code\n";
                 $to = $newEmail;
@@ -38,7 +38,7 @@
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
                 if(mail($to,$subject,$body,$headers))
-                    header("location: ../../thankYou.html");
+                    header("location: ../../../thankYou.html");
                 else
                     echo '<h3 style="color:red;">failed to send email</h3>';
             }
@@ -60,8 +60,8 @@
                 <button onclick="window.location.href='../../../authenticate/login_signup/logout.php'">log out</button>            
             </div>
         </nav>
-        <form action="" method="post">
-            <input id = "newUn" type="email" placeholder="Enter new email" name="name" required>
+        <form action="editEmail.php" method="post">
+            <input id = "newUn" type="email" placeholder="Enter new email" name="email" required>
             <input type="submit" name="submit" value="proceed">
         </form>
     </body>

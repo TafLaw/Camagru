@@ -35,6 +35,28 @@
                 echo "connection failed".$e->getMessage();
             }
         }
+
+        //check verified email
+        public function verified($username)
+        {
+            try {
+                $conn = connDB();
+                $deta = "SELECT * FROM profiles WHERE (name = '$username' or email = '$username')";
+                $ind = 0;
+
+                foreach($conn->query($deta) as $row)
+                {
+                    if ($row['name'] == $username || $row['email'] == $username)
+                        $verified = $row['varified'];
+                }
+                if ($verified)
+                    return true;
+                return false;
+            } catch (PDOException $e) {
+                echo "connection failed".$e->getMessage();
+            }
+        }
+        
         //check if password matches
         public function match($password, $confirm)
         {

@@ -10,15 +10,22 @@
 
     if (isset($_POST['login']))
     {
-        if($obj->login($username, $password) && isset($_SESSION['id']))
+        if ($obj->verified($username))
         {
-            header("location: ../../loggedIn/user/userProfile.php");
+            if($obj->login($username, $password) && isset($_SESSION['id']))
+            {
+                header("location: ../../loggedIn/user/userProfile.php");
+            }
+            else
+            {
+                $error = "Incorrect Username or Password";
+                include('login.php');
+            }
         }
         else
         {
-            $error = "Incorrect Username or Password";
-            include('login.php');
+            $error = "email not verified";
+            include('login.php');// add a page or button to verify email
         }
-
     }
 ?>
