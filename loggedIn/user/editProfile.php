@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include '../../connect/ConnDB.php';
+    include '../../config/ConnDB.php';
     if (!isset($_SESSION['id']))
         header("location: ../../authenticate/login_signup/signin_up.php");
 
@@ -26,6 +26,8 @@
         <nav>
             <div class="navBar">
                 <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
+                <button onclick="window.location.href='editProfile.php'">Edit profile</button>
+                <button onclick="window.location.href='../gallery/userGallery.php'">Uploads</button>
             </div>
         </nav>
         <div class="profilepic" <?php 

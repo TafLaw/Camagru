@@ -1,5 +1,5 @@
 <?php 
-    include '../../connect/ConnDB.php';
+    include '../../config/ConnDB.php';
 
     $email = $_GET['email'];
     $conn = connDB();

@@ -1,8 +1,6 @@
 <?php
-    $servername = "localhost";
-    $nme = "root";
-    $pass = "12345";
-    $dbName = "Camagru";
+    include '../../config/ConnDB.php';
+    
 
     if (isset($_GET['code']))
     {
@@ -11,8 +9,7 @@
         $id = $_GET['id'];
         //connect to database
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $conn = connDB();
             $stmt = $conn->prepare("SELECT code, varified FROM profiles WHERE varified = 0 AND code='$code' LIMIT 1");
             $stmt->execute();
             $varch = "SELECT * FROM profiles WHERE id = '$id' AND code = '$code' Limit 1";

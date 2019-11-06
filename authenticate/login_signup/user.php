@@ -1,5 +1,5 @@
 <?php 
-    include '../../connect/ConnDB.php';
+    include '../../config/ConnDB.php';
     class userClass{
         //login
         public function login($usernameEmail, $password)
@@ -56,7 +56,7 @@
                 echo "connection failed".$e->getMessage();
             }
         }
-        
+
         //check if password matches
         public function match($password, $confirm)
         {

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include '../../../connect/ConnDB.php';
+    include '../../../config/ConnDB.php';
     $conn = connDB();
     
     if (!isset($_SESSION['id']))

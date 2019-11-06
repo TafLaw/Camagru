@@ -13,13 +13,13 @@
         <nav>
             <div class="navBar">
                 <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>            
+                <button onclick="window.location.href='editProfile.php'">Edit profile</button>
             </div>
         </nav>
         <div id="profilepic">
 
         </div>
         <p>
-            <button onclick="window.location.href='editProfile.php'">Edit profile</button>
             <h2 id="pubUsername">USERNAME</h2>
             <div id="pubAbout">
                 ABOUT 

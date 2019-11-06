@@ -1,10 +1,5 @@
 <?php
-    include 'connect/ConnDB.php';
-    $servername = SERVERNAME;
-    $nme = USERNAME;
-    $pass = PASSWORD;
-    $dbName = DBNAME;
-    include("connect/config.php");
+    
 ?>
 <!DOCTYPE html>
 <html>

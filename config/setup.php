@@ -1,15 +1,21 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "12345";
-$dbName = "camagru";
+include 'ConnDB.php';
+$servername = SERVERNAME;
+$username = USERNAME;
+$password = PASSWORD;
+$dbName = DBNAME;
+
+ini_set('display_errors', 1); 
+ini_set('display_startup_errors', 1); 
+error_reporting(E_ALL);
 
 try {
   $conn = new PDO("mysql:host=$servername",$username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $data = "CREATE DATABASE IF NOT EXISTS $dbName";
   $conn->exec($data);
-  $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password);
+  $conn = connDB();
+  /* $conn = new PDO("mysql:host=$servername;dbname=$dbName", $nme, $password); */
 
   $sql1 = "CREATE TABLE IF NOT EXISTS `profiles` (
     `id` INT(11) AUTO_INCREMENT NOT NULL,

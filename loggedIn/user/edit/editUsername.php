@@ -1,5 +1,5 @@
 <?php 
-    include_once '../../../connect/ConnDB.php';
+    include_once '../../../config/ConnDB.php';
     session_start();
     $conn = connDB();
 
