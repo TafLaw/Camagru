@@ -190,3 +190,8 @@ td{
 .uGallery {
     margin: 20px;
 }
+#block {
+    width: 30%;
+    margin-top: 40px;
+    display: inline-block;
+}

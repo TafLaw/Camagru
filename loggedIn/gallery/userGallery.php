@@ -1,6 +1,13 @@
 <?php
     include_once '../../config/ConnDB.php';
     session_start();
+    $conn = connDB();
+    $id = $_SESSION['id'];
+    $userInfo = "SELECT * FROM profiles WHERE id = '$id' LIMIT 1";
+    foreach($conn->query($userInfo) as $rows)
+    {
+        $user = $rows['name'];
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,37 +20,43 @@
         <nav>
             <div class="navBar">
                 <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
-                <button onclick="window.location.href='editProfile.php'">Edit profile</button>
-                <button onclick="window.location.href='../gallery/userGallery.php'">Uploads</button>          
+                <button onclick="window.location.href='../user/editProfile.php'">Edit profile</button>
+                <button onclick="window.location.href='userGallery.php'">Uploads</button>          
             </div>
         </nav>
-        <form class="uGallery" action="" method="post">
+        <form  action="images/uploadPic.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">
             <button type="submit" name="submit">upload</button>
         </form>
         <hr>
         <h1 style="text-align: center">YOUR UPLOADS</h1>
         <?php
-        $query = "SELECT * FROM products ORDER BY id ASC";
-        $result = mysqli_query($connect, $query);
-        if(mysqli_num_rows($result) > 0)
-        {
-            while($row = mysqli_fetch_array($result))
+            $sql = "SELECT * FROM images WHERE user = '$user'";
+            if($res = $conn->query($sql))
             {
-                ?>
-                <div style="width: 40%; box-shadow: 4px 4px 22px gray;" id="block">
-                    <form method="post" action="./application/items/basket.php?action=add&id=<?php echo $row["id"]; ?>">
-                        <div align="center" id="images">
-                            <img src="<?php echo $row["image"]; ?>" alt="image">
-                            <button type="submit" formaction="#">like</button>
+                if ($res->fetchColumn() > 0)
+                {
+                    // echo "we will be here";
+                    foreach($conn->query($sql) as $row)
+                    {
+                    ?>
+                        <div id="block">
+                            <form method="post" action="comments.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>">
+                                <div align="center" id="images">
+                                    <img src="images/<?php echo $row["image"]; ?>" width="150px" height="150px" alt="image"><div>
+                                    <button type="submit" formaction="likes.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>">like</button></div>
+                                    <input type="text" name="comment" placeholder="write your comment here">
+                                    <button type="submit">comment</button>
+
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-                <?php
+                    <?php
+                    }
+                }
             }
-        }
-    else 
-    echo "failed\n";
-    ?>
+            else 
+                echo "failed\n";
+        ?>
     </body>
 </html>

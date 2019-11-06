@@ -101,7 +101,7 @@
                 }
                 if ($rows < 1 && $ind == 0)
                 {
-                    $stmt = $conn->prepare("INSERT INTO `profiles` (`name`, `email`, `image`, `password`, `code`, `varified`, `date`) VALUES ('$username', '$email', '', '$password', '$code', '0', '$dat');");
+                    $stmt = $conn->prepare("INSERT INTO `profiles` (`name`, `email`, `image`, `password`, `code`, `varified`, `notifications`, `date`) VALUES ('$username', '$email', '', '$password', '$code', '0', '1', '$dat');");
                     $stmt->bindParam("sss", $username, $email, $password);
                     $stmt->execute();
 

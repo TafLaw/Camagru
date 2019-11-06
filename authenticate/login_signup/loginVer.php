@@ -24,7 +24,7 @@
         }
         else
         {
-            $error = "email not verified";
+            $error = "email not verified or username not found";
             include('login.php');// add a page or button to verify email
         }
     }
