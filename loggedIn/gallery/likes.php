@@ -18,7 +18,7 @@
         $found = 0;
         $found2 = 0;
         $exist = 0;
-        $chk = "SELECT * FROM likes WHERE user = '$user' LIMIT 1";
+        $chk = "SELECT * FROM likes WHERE user = '$user' AND image = '$img' LIMIT 1";
 
         foreach ($conn->query($chk) as $rows)
         {
@@ -38,13 +38,13 @@
         }
         else if ($found)
         {
-            $stmt = $conn->prepare("UPDATE `likes` SET lik = 0 LIMIT 1");
+            $stmt = $conn->prepare("UPDATE `likes` SET lik = 0 WHERE image = '$img' LIMIT 1");
             $stmt->execute();
             header("location: userGallery.php");
         }
         else if ($found2)
         {
-            $stmt = $conn->prepare("UPDATE `likes` SET lik = 1 LIMIT 1");
+            $stmt = $conn->prepare("UPDATE `likes` SET lik = 1 WHERE image = '$img' LIMIT 1");
             $stmt->execute();
             header("location: userGallery.php");
         }

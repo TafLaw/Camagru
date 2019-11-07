@@ -67,6 +67,11 @@
                         <button class="edit button" href="#">edit</button>    
                     </td>
                 </tr>
+                <tr>
+                    <td>NOTIFICATIONS
+                        <button class="edit button" onclick="window.location.href='notifications.php'">ON</button>    
+                    </td>
+                </tr>
             </table>
         </p>
             

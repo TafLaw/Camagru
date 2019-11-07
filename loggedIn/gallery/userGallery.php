@@ -39,12 +39,35 @@
                     // echo "we will be here";
                     foreach($conn->query($sql) as $row)
                     {
-                    ?>
+                        ?>
                         <div id="block">
                             <form method="post" action="comments.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>">
                                 <div align="center" id="images">
                                     <img src="images/<?php echo $row["image"]; ?>" width="150px" height="150px" alt="image"><div>
-                                    <button type="submit" formaction="likes.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>">like</button></div>
+                                    <button type="submit" formaction="likes.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>" <?php 
+                                        $imge = $row['image'];
+                                        $likes = "SELECT * FROM likes WHERE user = '$user' AND image = '$imge'";
+                                        if ($res2 = $conn->query($likes))
+                                        {
+                                            if ($res2->fetchColumn() > 0)
+                                            {
+                                                foreach($conn->query($likes) as $lik)
+                                                {
+                                                    $liked = $lik['lik'];
+                                                }
+                                                if ($liked)
+                                                    echo 'style = "background-color: #621bf5; color: white"';
+                                                else
+                                                    echo 'style = "background-color: none"';
+                                                    
+                                            }
+                                        }
+                                    ?>><?php 
+                                        if ($liked)
+                                            echo "unlike";
+                                        else
+                                            echo "like";
+                                    ?></button></div>
                                     <input type="text" name="comment" placeholder="write your comment here">
                                     <button type="submit">comment</button>
 
