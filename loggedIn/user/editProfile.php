@@ -13,6 +13,16 @@
         $email = $rows['email'];
         $image = $rows['image'];
     }
+
+    //check notification
+    $sql = "SELECT * FROM profiles WHERE id = '$id' AND name = '$name' LIMIT 1";
+    foreach ($conn->query($sql) as $row){
+        $notif = $row['notifications'];
+    }
+    if ($notif)
+        $button = "ON";
+    else
+        $button = "OFF";
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +35,9 @@
     <body>
         <nav>
             <div class="navBar">
-                <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
-                <button onclick="window.location.href='editProfile.php'">Edit profile</button>
-                <button onclick="window.location.href='../gallery/userGallery.php'">Uploads</button>
+                <button class="navButton" onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
+                <button class="navButton" onclick="window.location.href='editProfile.php'">Edit profile</button>
+                <button class="navButton" onclick="window.location.href='../gallery/userGallery.php'">Uploads</button>
             </div>
         </nav>
         <div class="profilepic" <?php 
@@ -69,7 +79,7 @@
                 </tr>
                 <tr>
                     <td>NOTIFICATIONS
-                        <button class="edit button" onclick="window.location.href='notifications.php'">ON</button>    
+                        <button class="edit button" onclick="window.location.href='notifications.php'"><?php echo $button; ?></button>    
                     </td>
                 </tr>
             </table>

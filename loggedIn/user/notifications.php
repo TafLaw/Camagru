@@ -20,7 +20,7 @@
         {
             $stmt = $conn->prepare("UPDATE profiles SET notifications = 1 WHERE id = '$uid' LIMIT 1");
             $stmt->execute();
-        }  
+        }
+        header ("location: editProfile.php");
     }
-    echo "WELCOME TO NOTIFICATIONS";
 ?>
