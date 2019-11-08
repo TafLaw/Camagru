@@ -2,9 +2,9 @@ function uploadBtn()
 {
     document.getElementById("uploadpop").classList.toggle("show");
 }
-function captureBtn() 
+function pictureBtn() 
 {
-    document.getElementById("capturepop").classList.toggle("show");
+    document.getElementById("picturepop").classList.toggle("show");
 }
 
 window.onclick = function(event) 
@@ -22,9 +22,9 @@ window.onclick = function(event)
             }
         }
     }
-    else if (!event.target.matches('capturebtn')) 
+    else if (!event.target.matches('.picturebtn')) 
     {
-        var pop = document.getElementsByClassName("capturepop-cont");
+        var pop = document.getElementsByClassName("picturepop-cont");
         var i;
         for (i = 0; i < pop.length; i++)
         {

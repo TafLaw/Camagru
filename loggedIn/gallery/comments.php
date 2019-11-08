@@ -16,9 +16,38 @@
         $img = $_GET['img'];
         $comment = $_POST['comment'];
         $dat = date("H:i  d/m/Y");
+        $sendTo = "SELECT * FROM images WHERE image = '$img' LIMIT 1";
+        
+        foreach($conn->query($sendTo) as $name)
+        {
+            $uName = $name['user'];
+        }
+
+        $getEmail = "SELECT * FROM profiles WHERE name = '$uName' LIMIT 1";
+        foreach($conn->query($getEmail) as $mail)
+        {
+            $email = $mail['email'];
+            $dent = $mail['id'];
+            $notify = $mail['notifications'];
+        }
        
-        $stmt = $conn->prepare("INSERT INTO `comments`(`user`, `image`, `comment`, `date/time`) VALUES ('$user', '$img', '$comment', '$dat')");
+        $stmt = $conn->prepare("INSERT INTO `comments`(`user`, `image`, `comment`, `date/time`) VALUES ('$user', '$img', \"$comment\", '$dat')");
         $stmt->execute();
-        header("location: userGallery.php");
+       
+        if ($notify && $dent != $id)
+        {
+            $to = $email;
+            $subject = "NOTIFICATION\n";
+            $from = 'muzerenganit@gmail.com';
+            $body = 'Hi '.$uName.', '.$user.' recently commented your picture';
+            $headers = "From:".$from."\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+            if(mail($to,$subject,$body,$headers))
+                header("location: publicGallery.php");
+            else
+                echo '<h3 style="color:red;">failed to send email</h3>';
+        }
+        header("location: publicGallery.php");
     }
 ?>

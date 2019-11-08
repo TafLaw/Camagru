@@ -14,7 +14,7 @@
         {
             if($obj->login($username, $password) && isset($_SESSION['id']))
             {
-                header("location: ../../loggedIn/user/userProfile.php");
+                header("location: ../../loggedIn/gallery/publicGallery.php");
             }
             else
             {
