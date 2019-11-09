@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>edit username</title>
+        <title>Camagru</title>
         <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
@@ -27,10 +27,13 @@
                 <button onclick="window.location.href='publicGallery.php'">Gallery</button>          
             </div>
         </nav>
-        <form  action="images/uploadPic.php" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <button type="submit" name="submit">upload</button>
-        </form>
+        <div id="galleryUpload">
+            <form  action="images/uploadPic.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <button type="submit" name="submit">upload</button>
+            </form>
+            <a href="../user/capture.php"><img class="webcamAcc" src="../../icons/camera.png"></a>
+        </div>
         <hr>
         <h1 style="text-align: center">YOUR UPLOADS</h1>
         <?php

@@ -1,31 +1,35 @@
   <?php 
 
 include '../../config/ConnDB.php';
-
-  if (isset($_POST['save-btn']))
-  {
+session_start();
+if (isset($_POST['save-btn']))
+{
+    $conn = connDB();
+    $id = $_SESSION['id'];
+    $userData = "SELECT * FROM profiles WHERE id = '$id' LIMIT 1";
       $data = $_POST['image_data'];
       $img = explode(",", $data);
       $img = base64_decode($img[1]);
       
       $image_dir = "../gallery/images/";
-      $username = $_SESSION['id'];
-      $image_id = "webcam_" . uniqid();
+      $imageId = "webcam_" . uniqid();
       if (!file_exists($image_dir))
-      {
           mkdir($image_dir);
-      }
-      $filename = $image_id . '.jpeg';
+      $filename = $imageId . '.jpeg';
       if(file_put_contents($image_dir . $filename, $img))
       {
-          header("location: editProfile.php");
+          header("location: ../gallery/userGallery.php");
       }
       else{
-          $error_msg = "An error occured while uploading your file. Try again";
+          $error_msg = "An error occured while uploading your image";
       }
 
-      $conn = connDB();
-      $sql=$conn->prepare("INSERT INTO `images`(`user`, `image`, `upload date`) VALUES ('tafadzwa','$filename','8 November 2019')");
+      foreach ($conn->query($userData) as $value)
+      {
+          $name = $value['name'];
+      }
+      $date = date("d F Y");
+      $sql=$conn->prepare("INSERT INTO `images`(`user`, `image`, `upload date`) VALUES ('$name','$filename','$date')");
       $sql->execute();
   }
   ?>

@@ -44,6 +44,7 @@
         <h1 style="text-align: center">Gallery</h1>
         <?php
             $sql = "SELECT * FROM images";
+            $liked = 0;
             if($res = $conn->query($sql))
             {
                 if ($res->fetchColumn() > 0)
@@ -80,13 +81,37 @@
                                         echo "unlike";
                                         else if (!$liked)
                                         echo "like";
-                                        ?></button></div>
+                                        ?></button>
                                     <input type="text" name="comment" placeholder="write your comment here">
                                     <button type="submit">comment</button>
                                     <!-- <button type="submit" formaction="pictureBtn()" class="picturebtn showComments"></button> -->
                                     
                                 </div>
                             </form>
+                            <div id="more">
+                                <!-- display comments here -->
+                                <?php 
+                                    $sq = "SELECT * FROM comments WHERE image = '$imge' LIMIT 1";
+                                    //$result = 0;
+                                    if($result = $conn->query($sq))
+                                    {
+                                        if ($result->fetchColumn() > 0)
+                                        {
+                                            // echo "we will be here";
+                                            foreach($conn->query($sq) as $all)
+                                            {
+                                                ?>
+                                                <b><?php echo $all['user'];?></b><br/>
+                                                <hr/>
+                                                <p><?php echo $all['comment'] ?></p>
+                                            <?php
+                                            }
+                                        }
+                                    }
+                                    else 
+                                        echo "failed\n";
+                                ?>
+                            </div>
                         </div>
                         <?php
                     }

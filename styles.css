@@ -187,11 +187,11 @@ td{
     width: 450px;
     height: 450px;
 }
-canvas{background:#fff;}
-a {
-    background: #69c;
-    color: #ddd;
-    padding: 5px 10px;
+#more {
+    border: 2px solid black;
+    width: 30%;
+    height: 151px;
+    margin-left: 20%;
 }
 .picturepop-cont {
         margin-left: 73px;
@@ -210,9 +210,9 @@ a {
     margin: 20px;
 }
 #block {
-    width: 30%;
+    width: 100%;
     margin-top: 40px;
-    display: inline-block;
+    display: flex;
 }
 .showComments {
     background: URL('icons/drop-down-arrow.png');
@@ -222,7 +222,10 @@ a {
     height: 15px;
 }
 
-
-
-
-
+#galleryUpload {
+    display: flex;
+    justify-content: space-between;
+}
+.webcamAcc {
+    width: 50px;
+}
