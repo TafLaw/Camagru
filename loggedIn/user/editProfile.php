@@ -58,7 +58,7 @@
                         </form>
                     </div>
                 </div>
-                <button onclick='window.location.href="capture.html";' class="capturebtn btn">capture</button>
+                <button onclick='window.location.href="capture.php";' class="capturebtn btn">capture</button>
             </div>
         </div>
         <p>

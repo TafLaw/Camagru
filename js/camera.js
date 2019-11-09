@@ -1,55 +1,40 @@
-var video = document.querySelector("#video");
-
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.querySelector('video');
 const constraints = {
-  video: {
-    width: 450, height: 450
-  }
-};
-//access the webcam
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(function (stream) {
-      video.srcObject = stream;
+    video: {
+      width: 450, height: 450
+    }
+  };
+
+//add sticker to image
+function add_sticker(sticker_src)
+{
+    var imageObj = new Image();
+    
+    imageObj.src = sticker_src;
+    context.drawImage(imageObj, 0, 0, 100, 100);
+    document.getElementById('image').value = canvas.toDataURL('image/png');
+}   
+
+
+//connect to the webcam
+if (navigator.mediaDevices)
+{
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(stream) {
+        video.srcObject = stream;
+        document.getElementById('snap').addEventListener("click", captureImage);
     })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
+    .catch(function(err) {
+        alert("could not access camera " + error.name);
     });
 }
-//view image .. canvas tag
-var context = canvas.getContext('2d');
-snap.addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 450, 450);
-});
 
-/* var link = document.createElement('a');
-    link.innerHTML = 'download image';
-link.addEventListener('click', function(ev) {
-    link.href = canvas.toDataURL();
-    link.download = "mypainting.png";
-}, false);
-document.body.appendChild(link); */
-
-document.getElementById("download_button").onclick = function() {
-
-  var link = document.createElement("a");
-  link.download = "image.png";
-
-  canvas.toBlob(function(blob){
-    link.href = URL.createObjectURL(blob);
-    console.log(blob);
-    console.log(link.href);
-    link.click();
-  },'image/png');
+//capture the image
+function captureImage() {
+    canvas.height = video.offsetHeight;
+    canvas.width = video.offsetWidth;
+    context.drawImage(video, 0, 0, canvas.width,canvas.height);
+    document.getElementById('image').value = canvas.toDataURL('image/png');
 }
-
-/* var canvas=document.getElementById("canvas");
-var dataUrl=canvas.toDataURL();
-
-$.ajax({
-  type: "POST",
-  url: "http://localhost/saveCanvasDataUrl.php",
-  data: {image: dataUrl}
-})
-.done(function(respond){console.log("done: "+respond);})
-.fail(function(respond){console.log("fail");})
-.always(function(respond){console.log("always");}) */
