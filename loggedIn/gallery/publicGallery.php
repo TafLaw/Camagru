@@ -91,7 +91,7 @@
                             <div id="more">
                                 <!-- display comments here -->
                                 <?php 
-                                    $sq = "SELECT * FROM comments WHERE image = '$imge' LIMIT 1";
+                                    $sq = "SELECT * FROM comments WHERE image = '$imge'";
                                     //$result = 0;
                                     if($result = $conn->query($sq))
                                     {
@@ -103,7 +103,7 @@
                                                 ?>
                                                 <b><?php echo $all['user'];?></b><br/>
                                                 <hr/>
-                                                <p><?php echo $all['comment'] ?></p>
+                                                <p><?php echo $all['comment']; ?></p>
                                             <?php
                                             }
                                         }
