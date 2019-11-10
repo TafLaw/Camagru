@@ -87,4 +87,8 @@
         </p>
             
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

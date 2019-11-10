@@ -43,7 +43,7 @@ if (isset($_POST['save-btn']))
     <body>
         <nav>
             <div class="navBar">
-    
+                <button onclick="window.location.href='../gallery/publicGallery.php'">Gallery</button>
             </div>
         </nav>
 
@@ -66,4 +66,8 @@ if (isset($_POST['save-btn']))
         <canvas id="canvas" width="640" height="480"></canvas>
         <script src="../../js/camera.js"></script>      
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

@@ -66,4 +66,8 @@
             <h3 style="color: red"><?php echo $error; ?></h3>
         </form>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

@@ -1,8 +1,9 @@
-<?php/*  include 'reset_getMail.php'; */?>
+<?php $error = NULL;?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Reset Password</title>
+        <link rel="stylesheet" href="../../styles.css">
         <style>
         .input {
             width: 55vw;
@@ -23,6 +24,11 @@
         </style>
     </head>
     <body>
+        <nav>
+            <div class="navBar">
+                <button onclick="window.location.href='../../loggedIn/gallery/publicGallery.php'">Gallery</button>
+            </div>
+        </nav>
         <h3>Please enter your email</h3>
         <form action="reset_getMail.php" method="GET">
             <input class="input" type="email" placeholder="Email" name="email" required>
@@ -33,4 +39,8 @@
                 echo "<h5>".$error."</h5>";
             ?>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

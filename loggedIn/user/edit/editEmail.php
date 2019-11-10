@@ -65,4 +65,8 @@
             <input type="submit" name="submit" value="proceed">
         </form>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

@@ -8,7 +8,7 @@
     <body>
         <nav>
             <div class="navBar">
-
+                <button onclick="window.location.href='../../loggedIn/gallery/publicGallery.php'">Gallery</button>
             </div>
         </nav>
         <div class="login">
@@ -26,4 +26,8 @@
             </form>
         </div>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

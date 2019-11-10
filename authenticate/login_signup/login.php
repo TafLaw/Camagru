@@ -5,6 +5,11 @@
         <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
+        <nav>
+            <div class="navBar">
+                <button onclick="window.location.href='../../loggedIn/gallery/publicGallery.php'">Gallery</button>
+            </div>
+        </nav>
         <div id="error">
             <?php echo '<p class="error">'.$error.'</p>'; ?>
         </div>
@@ -21,4 +26,8 @@
             </form>
         </div>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

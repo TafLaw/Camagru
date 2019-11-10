@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Reset Password</title>
+        <link rel="stylesheet" href="../../styles.css">
         <style>
             #block {
                 margin: 20%;
@@ -24,6 +25,11 @@
         </style>
     </head>
     <body>
+        <nav>
+            <div class="navBar">
+                <button onclick="window.location.href='../../loggedIn/gallery/publicGallery.php'">Gallery</button>
+            </div>
+        </nav>
         <div id="block">
             <h3>Reset Password</h3>
             <form method = "post" action="reset_pass.php?email=<?php echo $_GET['email'];?>&id=<?php echo $_GET['id'];?>">
@@ -34,4 +40,8 @@
             </form>
         </div>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>

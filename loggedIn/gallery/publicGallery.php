@@ -3,6 +3,7 @@
     session_start();
     $conn = connDB();
     $id = $_SESSION['id'];
+    $user = Null;
     $userInfo = "SELECT * FROM profiles WHERE id = '$id' LIMIT 1";
     foreach($conn->query($userInfo) as $rows)
     {
@@ -137,4 +138,8 @@
             echo "failed\n";
             ?>
     </body>
+    <footer>
+            <hr>
+            &copy; <i>tmuzeren 2019</i>
+    </footer>
 </html>
