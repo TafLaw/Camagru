@@ -44,7 +44,6 @@
         <h1 style="text-align: center">Gallery</h1>
         <?php
             $sql = "SELECT * FROM images";
-            $liked = 0;
             if($res = $conn->query($sql))
             {
                 if ($res->fetchColumn() > 0)
@@ -52,11 +51,25 @@
                     // echo "we will be here";
                     foreach($conn->query($sql) as $row)
                     {
+                        $liked = 0;
+                        $tot = 0;
+                        $IMG = $row["image"];
+                        $totLikes = "SELECT * FROM likes WHERE image = '$IMG'";
+                        foreach($conn->query($totLikes) as $total)
+                        {
+                            $tot += $total['lik'];
+                        }
                         ?>
+                        <h4 id="totLikes"><?php 
+                            if ($tot == 1)
+                                echo $tot.' person liked this';
+                            else
+                                echo $tot.' people liked this';
+                            ?></h4>
+                        <div id="belongs"><b><?php echo $row['user'];?></b></div>
                         <div id="block">
                             <form method="post" action="comments.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>">
                             <div align="center" id="images">
-                                
                                 <img src="images/<?php echo $row["image"]; ?>" width="150px" height="150px" alt="image">
                                 <button type="submit" formaction="likes.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>" <?php 
                                         $imge = $row['image'];
@@ -101,9 +114,12 @@
                                             foreach($conn->query($sq) as $all)
                                             {
                                                 ?>
+                                                <div id="commentBlock">
                                                 <b><?php echo $all['user'];?></b><br/>
                                                 <hr/>
                                                 <p><?php echo $all['comment']; ?></p>
+                                                </div>
+                                                <br/>
                                             <?php
                                             }
                                         }

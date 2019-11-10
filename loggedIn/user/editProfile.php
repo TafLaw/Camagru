@@ -75,7 +75,7 @@
                 </tr>
                 <tr>
                     <td>PASSWORD HIDDEN
-                        <button class="edit button" href="#">edit</button>    
+                        <button class="edit button" onclick="window.location.href='edit/editPassword.php'">edit</button>    
                     </td>
                 </tr>
                 <tr>
