@@ -3,7 +3,7 @@
     session_start();
     include 'user.php';
     
-    $username = $_POST["username"];
+    $username = htmlspecialchars($_POST["username"]);
     $password = $_POST["password"];
     $obj = new userClass();
     $error = NULL;
