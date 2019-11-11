@@ -26,6 +26,7 @@
                 $stmt = $conn->prepare("UPDATE profiles SET name = '$newUsername' WHERE id = '$id' LIMIT 1");
                 $stmt->bindParam('newUsername', $newUsername,PDO::PARAM_STR);
                 $stmt->execute();
+                header("location: ../editProfile.php");
             }
         }
         else

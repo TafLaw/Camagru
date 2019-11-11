@@ -26,7 +26,7 @@ if (isset($_POST['save-btn']))
 
       foreach ($conn->query($userData) as $value)
       {
-          $name = $value['name'];
+          $name = $value['id'];
       }
       $date = date("d F Y");
       $sql=$conn->prepare("INSERT INTO `images`(`user`, `image`, `upload date`) VALUES ('$name','$filename','$date')");
@@ -43,11 +43,15 @@ if (isset($_POST['save-btn']))
     <body>
         <nav>
             <div class="navBar">
-                <button onclick="window.location.href='../gallery/publicGallery.php'">Gallery</button>
+                <button class="nav_btn" onclick="window.location.href='../gallery/publicGallery.php'">Gallery</button>
             </div>
         </nav>
 
-        <img id="sticker1" class="grid-item sticker" src="imageUploads\boots.jpg" width="100" height="100" onclick="add_sticker(src)">
+        <img id="sticker1" class="sticker" src="stickers/5a28b4b29cac33.4747925615126171386417.png" width="100" height="100" onclick="add_sticker(src)">
+        <img id="sticker1" class="sticker" src="stickers/frame-png-2938271_640.png" width="100" height="100" onclick="add_sticker(src)">
+        <img id="sticker1" class="sticker" src="stickers/heart-1179072_1920.png" width="100" height="100" onclick="add_sticker(src)">
+        <img id="sticker1" class="sticker" src="stickers/http___pluspng.com_img-png_png-frames-for-pictures-10-free-picture-frames-in-png-format-to-spruce-up-your-digital-photos-768.png" width="100" height="100" onclick="add_sticker(src)">
+        <img id="sticker1" class="sticker" src="stickers/http___pluspng.com_img-png_png-frames-for-pictures-retro-dots-frame-768.png" width="100" height="100" onclick="add_sticker(src)">
 
         <div id="container">
             <video id="video" playsinline autoplay></video>

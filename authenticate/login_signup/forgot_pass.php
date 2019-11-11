@@ -26,7 +26,7 @@
     <body>
         <nav>
             <div class="navBar">
-                <button onclick="window.location.href='../../loggedIn/gallery/publicGallery.php'">Gallery</button>
+                <button class="nav_btn" onclick="window.location.href='../../loggedIn/gallery/publicGallery.php'">Gallery</button>
             </div>
         </nav>
         <h3>Please enter your email</h3>

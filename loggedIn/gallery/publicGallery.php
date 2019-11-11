@@ -7,14 +7,17 @@
     $userInfo = "SELECT * FROM profiles WHERE id = '$id' LIMIT 1";
     foreach($conn->query($userInfo) as $rows)
     {
-        $user = $rows['name'];
+        $user = $rows['id'];
     }
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 10 ? (int)$_GET['per-page'] : 5;
+    $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>edit username</title>
+        <title>Gallery</title>
         <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
@@ -23,16 +26,16 @@
                 <?php 
                 if (!$_SESSION['id'])
                 {?>
-                    <button onclick="window.location.href='../../authenticate/login_signup/signin_up.php'">login</button>
-                    <button onclick="window.location.href='../../authenticate/login_signup/signup.php'">sign up</button>
+                    <button class="nav_btn" onclick="window.location.href='../../authenticate/login_signup/signin_up.php'">login</button>
+                    <button class="nav_btn" onclick="window.location.href='../../authenticate/login_signup/signup.php'">sign up</button>
                 <?php
                 }
                 else
                 {?>
-                <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
-                <button onclick="window.location.href='../user/editProfile.php'">Edit profile</button>
-                <button onclick="window.location.href='userGallery.php'">Uploads</button>          
-                <button onclick="window.location.href='publicGallery.php'">Gallery</button>
+                <button class="nav_btn" onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
+                <button class="nav_btn" onclick="window.location.href='../user/editProfile.php'">Edit profile</button>
+                <button class="nav_btn" onclick="window.location.href='userGallery.php'">Uploads</button>          
+                <button class="nav_btn" onclick="window.location.href='publicGallery.php'">Gallery</button>
                 <?php
                 }?>
             </div>
@@ -44,9 +47,14 @@
         <hr>
         <h1 style="text-align: center">Gallery</h1>
         <?php
-            $sql = "SELECT * FROM images";
+            $sql = "SELECT * FROM images LIMIT {$start}, {$perPage}";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            
             if($res = $conn->query($sql))
             {
+                $tota = $stmt->rowCount();
+                $pages = ceil($tota / $perPage) + 1;
                 if ($res->fetchColumn() > 0)
                 {
                     // echo "we will be here";
@@ -67,11 +75,19 @@
                             else
                                 echo $tot.' people liked this';
                             ?></h4>
-                        <div id="belongs"><b><?php echo $row['user'];?></b></div>
+                        <?php 
+                            $getUser = "SELECT * FROM profiles WHERE id = {$row['user']}";
+                            foreach($conn->query($getUser) as $usern)
+                            {
+                                $userName = $usern['name'];
+                            }
+                        ?>
+                        <div id="belongs"><b><?php echo $userName;?></b></div>
                         <div id="block">
                             <form method="post" action="comments.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>">
                             <div align="center" id="images">
                                 <img src="images/<?php echo $row["image"]; ?>" width="150px" height="150px" alt="image">
+                                <?php if (isset($_SESSION['id'])){ ?>
                                 <button type="submit" formaction="likes.php?user=<?php echo $user;?>&img=<?php echo $row["image"]?>" <?php 
                                         $imge = $row['image'];
                                         $likes = "SELECT * FROM likes WHERE user = '$user' AND image = '$imge'";
@@ -95,17 +111,20 @@
                                         echo "unlike";
                                         else if (!$liked)
                                         echo "like";
-                                        ?></button>
+                                    ?></button>
                                     <input type="text" name="comment" placeholder="write your comment here">
-                                    <button type="submit">comment</button>
-                                    <!-- <button type="submit" formaction="pictureBtn()" class="picturebtn showComments"></button> -->
+                                    <button type="submit">comment</button><?php }?>
+                                     <!-- <button type="submit" formaction="pictureBtn()" class="picturebtn showComments"></button> -->
                                     
                                 </div>
                             </form>
+                            <?php
+                            if (isset($_SESSION['id'])){?>
                             <div id="more">
                                 <!-- display comments here -->
                                 <?php 
                                     $sq = "SELECT * FROM comments WHERE image = '$imge'";
+                                    
                                     //$result = 0;
                                     if($result = $conn->query($sq))
                                     {
@@ -114,9 +133,15 @@
                                             // echo "we will be here";
                                             foreach($conn->query($sq) as $all)
                                             {
+                                                $gID = $all['user'];
+                                                $ss = "SELECT * FROM profiles WHERE id = '$gID'";
+                                                foreach($conn->query($ss) as $owned)
+                                                {
+                                                    $commentedBy = $owned['name'];
+                                                }
                                                 ?>
                                                 <div id="commentBlock">
-                                                <b><?php echo $all['user'];?></b><br/>
+                                                <b><?php echo $commentedBy;?></b><br/>
                                                 <hr/>
                                                 <p><?php echo $all['comment']; ?></p>
                                                 </div>
@@ -128,7 +153,7 @@
                                     else 
                                         echo "failed\n";
                                 ?>
-                            </div>
+                            </div><?php }?>
                         </div>
                         <?php
                     }
@@ -137,6 +162,18 @@
             else 
             echo "failed\n";
             ?>
+            <div class="pagination">
+                <?php 
+                    for ($i = 1; $i <= $pages; $i++)
+                    {?>
+                        <a href="?page=<?php echo $i; ?>&per-page=<?php echo $perPage;?>"<?php 
+                            if ($page === $i)
+                                echo 'class="selected"';
+                        ?>><?php echo $i;?></a>
+                        <?php
+                    }?>
+                
+            </div>
     </body>
     <footer>
             <hr>

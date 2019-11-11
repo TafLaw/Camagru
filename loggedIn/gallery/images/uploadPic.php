@@ -22,7 +22,7 @@
             $userInfo = "SELECT * FROM profiles WHERE id = '$uid' LIMIT 1";
             foreach($conn->query($userInfo) as $rows)
             {
-                $user = $rows['name'];
+                $user = $rows['id'];
             }
             //check if it's an image
             $check = getimagesize($_FILES["file"]["tmp_name"]);
@@ -54,6 +54,8 @@
                 }
                 else
                 {
+                    $t = time();
+                    $fName = $t.'_'.$fName;
                     if (move_uploaded_file($_FILES["file"]["tmp_name"], $fName))
                     {
                         echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";

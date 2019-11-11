@@ -35,10 +35,10 @@
     <body>
         <nav>
             <div class="navBar">
-                <button class="navButton" onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
-                <button class="navButton" onclick="window.location.href='editProfile.php'">Edit profile</button>
-                <button class="navButton" onclick="window.location.href='../gallery/userGallery.php'">Uploads</button>
-                <button class="navButton" onclick="window.location.href='../gallery/publicGallery.php'">Gallery</button>
+                <button class="nav_btn" onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
+                <button class="nav_btn" onclick="window.location.href='editProfile.php'">Edit profile</button>
+                <button class="nav_btn" onclick="window.location.href='../gallery/userGallery.php'">Uploads</button>
+                <button class="nav_btn" onclick="window.location.href='../gallery/publicGallery.php'">Gallery</button>
             </div>
         </nav>
         <div class="profilepic" <?php 
