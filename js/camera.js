@@ -13,7 +13,7 @@ function add_sticker(sticker_src)
     var imageObj = new Image();
     
     imageObj.src = sticker_src;
-    context.drawImage(imageObj, 0, 0, 100, 100);
+    context.drawImage(imageObj, 0, 0, 450, 450);
     document.getElementById('image').value = canvas.toDataURL('image/png');
 }   
 

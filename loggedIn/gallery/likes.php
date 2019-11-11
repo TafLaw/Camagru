@@ -20,23 +20,26 @@
         $exist = 0;
         $chk = "SELECT * FROM likes WHERE user = '$user' AND image = '$img' LIMIT 1";
         $sendTo = "SELECT * FROM images WHERE image = '$img' LIMIT 1";
+        $whoLiked = "SELECT * FROM profiles WHERE id = '$user'";
         
+        foreach($conn->query($whoLiked) as $who)
+        {
+            $likedBy = $who['name'];
+        }
+
         foreach($conn->query($sendTo) as $name)
         {
             $uName = $name['user'];
         }
 
-        $getEmail = "SELECT * FROM profiles WHERE name = '$uName' LIMIT 1";
+        $getEmail = "SELECT * FROM profiles WHERE id = '$uName' LIMIT 1";
         foreach($conn->query($getEmail) as $mail)
         {
             $email = $mail['email'];
+            $person = $mail['name'];
             $dent = $mail['id'];
             $notify = $mail['notifications'];
         }
-        echo "liked by $user id $id<br/>";
-        echo "belongs $uName id $dent<br/>";
-        echo "email $email<br/>";
-        echo "notifications $notify<br/>";
 
         foreach ($conn->query($chk) as $rows)
         {
@@ -58,7 +61,7 @@
                 $to = $email;
                 $subject = "NOTIFICATION\n";
                 $from = 'muzerenganit@gmail.com';
-                $body = 'Hi '.$uName.', '.$user.' recently liked your picture';
+                $body = 'Hi '.$person.', '.$likedBy.' recently liked your picture';
                 $headers = "From:".$from."\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";

@@ -8,7 +8,7 @@
         header('location: ../../authenticate/login_signup/signin_up.php');
     foreach($conn->query($userInfo) as $rows)
     {
-        $user = $rows['name'];
+        $user = $rows['id'];
     }
 ?>
 <!DOCTYPE html>
@@ -21,10 +21,10 @@
     <body>
         <nav>
             <div class="navBar">
-                <button onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
-                <button onclick="window.location.href='../user/editProfile.php'">Edit profile</button>
-                <button onclick="window.location.href='userGallery.php'">Uploads</button>          
-                <button onclick="window.location.href='publicGallery.php'">Gallery</button>          
+                <button class="nav_btn" onclick="window.location.href='../../authenticate/login_signup/logout.php'">log out</button>
+                <button class="nav_btn" onclick="window.location.href='../user/editProfile.php'">Edit profile</button>
+                <button class="nav_btn" onclick="window.location.href='userGallery.php'">Uploads</button>          
+                <button class="nav_btn" onclick="window.location.href='publicGallery.php'">Gallery</button>          
             </div>
         </nav>
         <div id="galleryUpload">

@@ -34,7 +34,7 @@ try {
    
    $sql2 = "CREATE TABLE IF NOT EXISTS `images` (
     `id` INT(11) AUTO_INCREMENT NOT NULL,
-    `user` varchar(255) NOT NULL,
+    `user` INT(11) NOT NULL,
     `image` varchar(255) NOT NULL,  
     `upload date` varchar(25) NOT NULL,
     PRIMARY KEY (`id`)
@@ -44,7 +44,7 @@ try {
   
   $sql3 = "CREATE TABLE IF NOT EXISTS `comments` (
     `id` INT(11) AUTO_INCREMENT NOT NULL,
-    `user` varchar(255) NOT NULL,
+    `user` INT(11) NOT NULL,
     `image` varchar(255) NOT NULL,
     `comment` varchar(255) NOT NULL,
     `date/time` varchar(25) NOT NULL,
@@ -55,7 +55,7 @@ try {
   
   $sql4 = "CREATE TABLE IF NOT EXISTS `likes` (
     `id` INT(11) AUTO_INCREMENT NOT NULL,
-    `user` varchar(255) NOT NULL,
+    `user` INT(11) NOT NULL,
     `image` varchar(255) NOT NULL,
     `lik` INT (1) NOT NULL,
     `date/time` varchar(25) NOT NULL,

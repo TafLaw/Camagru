@@ -14,20 +14,27 @@
         $id = $_SESSION['id'];
         $user = $_GET['user'];
         $img = $_GET['img'];
-        $comment = $_POST['comment'];
+        $comment = htmlspecialchars( $_POST['comment']);
         $dat = date("H:i  d/m/Y");
         $sendTo = "SELECT * FROM images WHERE image = '$img' LIMIT 1";
+        $whoComntd = "SELECT * FROM profiles WHERE id = '$user'";
+
+        foreach($conn->query($whoComntd) as $who)
+        {
+            $commentBy = $who['name'];
+        }
         
         foreach($conn->query($sendTo) as $name)
         {
             $uName = $name['user'];
         }
-
-        $getEmail = "SELECT * FROM profiles WHERE name = '$uName' LIMIT 1";
+        
+        $getEmail = "SELECT * FROM profiles WHERE id = '$uName' LIMIT 1";
         foreach($conn->query($getEmail) as $mail)
         {
             $email = $mail['email'];
             $dent = $mail['id'];
+            $person = $mail['name'];
             $notify = $mail['notifications'];
         }
        
@@ -39,7 +46,7 @@
             $to = $email;
             $subject = "NOTIFICATION\n";
             $from = 'muzerenganit@gmail.com';
-            $body = 'Hi '.$uName.', '.$user.' recently commented your picture';
+            $body = 'Hi '.$person.', '.$commentBy.' recently commented your picture';
             $headers = "From:".$from."\r\n";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
