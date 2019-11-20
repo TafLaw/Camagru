@@ -1,3 +1,3 @@
 <?php
-    DEFINE(ROOT, "camagru");
+    DEFINE(ROOT, "tmuzeren");
 ?>

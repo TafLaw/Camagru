@@ -1,5 +1,6 @@
 <?php 
     include_once '../../../config/ConnDB.php';
+    include_once '../../../config/root.php';
     session_start();
     $conn = connDB();
 
@@ -23,6 +24,7 @@
             }
             if ($ind == 0)
             {
+                $root = ROOT;
                 $code = substr(password_hash($newEmail, PASSWORD_DEFAULT), 0, 8);
                 $stmt = $conn->prepare("UPDATE profiles SET email = '$newEmail', varified = 0, code = '$code' WHERE id = '$id' LIMIT 1");
                 $stmt->bindParam('newEmail', $newEmail,PDO::PARAM_STR);
@@ -33,12 +35,12 @@
                 $to = $newEmail;
                 $subject = "This is your verification code for Camagru\n";
                 $from = 'muzerenganit@gmail.com';
-                $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/Camagru/authenticate/login_signup/verify.php?id='.$id.'&code='.$code.'">http://localhost:8080/Camagru/authenticate/login_signup/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
+                $body='Your verification Code is '.$code.' Please Click On This link <a href="http://localhost:8080/'.$root.'/authenticate/login_signup/verify.php?id='.$id.'&code='.$code.'">http://localhost:8080/'.$root.'/authenticate/login_signup/verify.php?id='.$uid.'&code='.$code.'</a> to activate your account.';
                 $headers = "From:".$from."\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
                 if(mail($to,$subject,$body,$headers))
-                    header("location: ../../../thankYou.html");
+                    header("location: ../../../resetmail.html");
                 else
                     echo '<h3 style="color:red;">failed to send email</h3>';
             }

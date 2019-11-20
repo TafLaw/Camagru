@@ -2,14 +2,14 @@
     include_once '../../../config/ConnDB.php';
     session_start();
     $conn = connDB();
-
+   
    if (isset($_POST['submit']))
     {
         if (isset($_SESSION['id']))
         {
             $sqlcol = "SELECT * FROM `profiles`";
             $ind = 0;
-            $newUsername = $_POST['name'];
+            $newUsername = htmlspecialchars($_POST['name']);
             $id = $_SESSION['id'];
             
             foreach($conn->query($sqlcol) as $row)
@@ -23,7 +23,7 @@
             }
             if ($ind == 0)
             {
-                $stmt = $conn->prepare("UPDATE profiles SET name = '$newUsername' WHERE id = '$id' LIMIT 1");
+                $stmt = $conn->prepare("UPDATE profiles SET name = \"$newUsername\" WHERE id = '$id' LIMIT 1");
                 $stmt->bindParam('newUsername', $newUsername,PDO::PARAM_STR);
                 $stmt->execute();
                 header("location: ../editProfile.php");
